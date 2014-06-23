@@ -3,7 +3,7 @@
 
 #include <QImage>
 #include <QString>
-#include <zxing/LuminanceSource.h>
+#include <zxing/zxing/LuminanceSource.h>
 
 using namespace zxing;
 
@@ -11,9 +11,11 @@ class CameraImageWrapper : public LuminanceSource
 {
 public:
     CameraImageWrapper();
-    CameraImageWrapper(QImage& image);
+    CameraImageWrapper(const QImage& sourceImage);
     CameraImageWrapper(CameraImageWrapper& otherInstance);
     ~CameraImageWrapper();
+
+    static CameraImageWrapper* Factory(const QImage& image, int maxWidth=-1, int maxHeight=-1, bool smoothTransformation=false);
     
     int getWidth() const;
     int getHeight() const;
@@ -21,27 +23,17 @@ public:
     unsigned char getPixel(int x, int y) const;
     unsigned char* copyMatrix() const;
     
-    /**
-      * Set the source of the image. If it fails,  returns false.
-      */
-    bool setImage(QString fileName);
-    bool setImage(QImage newImage);
-
     QImage grayScaleImage(QImage::Format f);
     QImage getOriginalImage();
 
-
     // Callers take ownership of the returned memory and must call delete [] on it themselves.
-    unsigned char* getRow(int y, unsigned char* row);
-    unsigned char* getMatrix();
-
-    void setSmoothTransformation(bool enable);
+    ArrayRef<char> getRow(int y, ArrayRef<char> row) const;
+    ArrayRef<char> getMatrix() const;
   
 private:
     QImage image;
     unsigned char* pRow;
     unsigned char* pMatrix;
-    bool isSmoothTransformationEnabled;
 };
 
 #endif //CAMERAIMAGE_H

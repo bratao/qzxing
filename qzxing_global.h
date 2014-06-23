@@ -1,7 +1,8 @@
 #ifndef QZXING_GLOBAL_H
 #define QZXING_GLOBAL_H
 
-#include <QtCore/QtGlobal>
+#include <QtCore>
+#include <qglobal.h>
 
 #if defined(QZXING_LIBRARY)
 #  define QZXINGSHARED_EXPORT Q_DECL_EXPORT
