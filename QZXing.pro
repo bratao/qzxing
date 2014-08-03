@@ -11,7 +11,7 @@ uri = QZXing
 QZXING_PLUGIN_VERSION_MAJOR = 1
 QZXING_PLUGIN_VERSION_MINOR = 3
 
-LIBS += -liconv
+
 
 
 INCLUDEPATH  += zxing
@@ -24,6 +24,8 @@ win32-g++{
     HEADERS += zxing/win32/zxing/iconv.h
 
     SOURCES += zxing/win32/zxing/win_iconv.c
+	
+	LIBS += -liconv
 }
 
 DEFINES += QZXING_LIBRARY \
