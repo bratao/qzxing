@@ -1,10 +1,11 @@
-#include "QZXing.h"
+#include "qzxing.h"
 
 #include <zxing/common/GlobalHistogramBinarizer.h>
 #include <zxing/Binarizer.h>
 #include <zxing/BinaryBitmap.h>
 #include <zxing/MultiFormatReader.h>
 #include <zxing/DecodeHints.h>
+#include <zxing/BarcodeFormat.h>
 #include "CameraImageWrapper.h"
 #include "imagehandler.h"
 #include <QTime>
@@ -39,10 +40,11 @@ QZXing::QZXing(QZXing::DecoderFormat decodeHints, QObject *parent) : QObject(par
 
 void QZXing::setDecoder(const uint &hint)
 {
+
     unsigned int newHints = 0;
 
     if(hint & DecoderFormat_Aztec)
-        newHints |= DecodeHints::AZTEC_HINT;
+        newHints |=  1 << zxing::BarcodeFormat::AZTEC;
 
     if(hint & DecoderFormat_CODABAR)
         newHints |= DecodeHints::CODABAR_HINT;

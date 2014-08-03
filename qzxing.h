@@ -1,9 +1,10 @@
 #ifndef QZXING_H
 #define QZXING_H
 
-#include "QZXing_global.h"
+#include "qzxing_global.h"
 #include <QObject>
 #include <QImage>
+#include <zxing/DecodeHints.h>
 
 #if QT_VERSION >= 0x040700 && QT_VERSION < 0x050000
 #include <QtDeclarative>
